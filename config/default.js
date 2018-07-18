@@ -15,5 +15,8 @@ module.exports = {
     },
     session: {
         secretKey: 'myKoajsSecretKey'
+    },
+    memcached: {
+        server: '127.0.0.1:11211'
     }
 };

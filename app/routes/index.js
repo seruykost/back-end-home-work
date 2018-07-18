@@ -15,6 +15,7 @@ module.exports = function routes(app, passport) {
         
     // Controllers
         indexController  = require('../controllers/indexController'),
+        goodsController  = require('../controllers/goodsController'),
         loginController  = require('../controllers/loginController'),
         secureController = require('../controllers/secureController');
 
@@ -25,9 +26,9 @@ module.exports = function routes(app, passport) {
         .get('/users',     indexController.list)
         .get('/users/:id', indexController.getId)
 
-      /*  .get('/goods/:id', goodsController.get)
-        .post('/goods/',   goodsController.post)
-        .del('/goods/:id', goodsController.del)*/
+        .get('/goods/:id', goodsController.getId)
+        .post('/goods/',   goodsController.createId)
+        .del('/goods/:id', goodsController.deleteId)
 
         .get('/login',     loginController.login)
         .post('/login',
