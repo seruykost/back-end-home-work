@@ -7,7 +7,7 @@ const memcached = require('../managers/memcach');
  */
 async function getId (ctx, next) {
     ctx.body = await memcached.getMemcached(ctx.params.id);
-    ctx.status = 200;
+    ctx.status = (ctx.body !== undefined) ? 200 : 404;
     await next();
 }
 
@@ -16,7 +16,7 @@ async function getId (ctx, next) {
  */
 async function createId (ctx, next) {
     ctx.body = await memcached.setMemcached(ctx.request.body);
-    ctx.status = 201;
+    ctx.status = (ctx.body !== false) ? 201 : 400;
     await next();
 }
 
@@ -25,7 +25,7 @@ async function createId (ctx, next) {
  */
 async function deleteId (ctx, next) {
     await memcached.delMemcached(ctx.params.id);
-    ctx.status = 204;
+    ctx.status = (ctx.body !== false) ? 204 : 400;
     await next();
 }
 

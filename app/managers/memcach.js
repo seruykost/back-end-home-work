@@ -11,7 +11,8 @@ const config = require('config'),
 
       Memcached.config.poolSize = 10;
 
-      let countKeys =  0;
+let countKeys =  0;
+const lifeTime = 300;
 
 const memcached = new Memcached(config.memcached.server);
 
@@ -19,7 +20,7 @@ module.exports = {
 
     getMemcached: function getIdFromMC(id) {
         return new Promise(function(resolve, reject) {
-            memcached.get(id, function (err, data) {
+            memcached.get(parseInt(id), function (err, data) {
                 if(!err){
                     resolve(data);
                 }else{
@@ -31,7 +32,13 @@ module.exports = {
 
     setMemcached: function setNewIdToMC(inputData) {
         return new Promise(function(resolve, reject) {
-            memcached.set(countKeys++,inputData,300,function (err, data) {
+ //         memcached.set(countKeys++,inputData,lifeTime,function (err, data) {
+
+            memcached.stats(function(err,data){
+                countKeys = data[0].curr_items;
+            });
+            console.log(countKeys); // problem with keys! there are delete in real time
+            memcached.set(countKeys++,inputData,lifeTime,function (err, data) {
                 if(!err){
                     resolve(data);
                 }else{
@@ -44,7 +51,7 @@ module.exports = {
     delMemcached: function removeIdInMC(id) {
         return new Promise((resolve, reject) => {
             return new Promise(function (resolve, reject) {
-                memcached.delete(id, function (err, data) {
+                memcached.delete(parseInt(id), function (err, data) {
                     if (!err) {
                         resolve(data);
                     } else {
