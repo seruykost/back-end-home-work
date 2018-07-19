@@ -15,7 +15,7 @@ module.exports = function routes(app, passport) {
         
     // Controllers
         indexController  = require('../controllers/indexController'),
-        goodsController  = require('../controllers/goodsController'),
+        goodsController  = require('../controllers/goodsController'), // підключення контролера
         loginController  = require('../controllers/loginController'),
         secureController = require('../controllers/secureController');
 
@@ -26,9 +26,9 @@ module.exports = function routes(app, passport) {
         .get('/users',     indexController.list)
         .get('/users/:id', indexController.getId)
 
-        .get('/goods/:id', goodsController.getId)
-        .post('/goods/',   goodsController.createId)
-        .del('/goods/:id', goodsController.deleteId)
+        .get('/goods/:id', goodsController.getId) //реалізація маршруту по типу запиту get
+        .post('/goods/',   goodsController.createId) //реалізація маршруту по типу запиту post
+        .del('/goods/:id', goodsController.deleteId) //реалізація маршруту по типу запиту delete
 
         .get('/login',     loginController.login)
         .post('/login',
