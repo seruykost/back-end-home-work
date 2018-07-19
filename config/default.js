@@ -17,6 +17,7 @@ module.exports = {
         secretKey: 'myKoajsSecretKey'
     },
     memcached: {
-        server: '127.0.0.1:11211'
+        server: '127.0.0.1',
+        port: 11211
     }
 };

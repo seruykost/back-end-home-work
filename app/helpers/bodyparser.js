@@ -2,9 +2,9 @@
 const convert = require('koa-convert');
 
 /**
- * Body parser
+ * Body parser , вже просто Body
  */
 module.exports = function bodyparser(app) {
-    var bodyParser = require('koa-bodyparser');
-    app.use(convert(bodyParser()));
+    var requestbody = require('koa-body');
+    app.use(convert(requestbody()));
 };

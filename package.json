@@ -23,7 +23,8 @@
     "koa-router": ">=7.4.x",
     "koa-views": "^5.0.2",
     "memcached": "^2.2.2",
-    "passport-local": "*"
+    "passport-local": "*",
+    "utf8": "^3.0.0"
   },
   "devDependencies": {
     "jasmine-node": "*",
